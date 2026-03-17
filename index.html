@@ -1,16 +1,80 @@
 <!doctype html>
 <html lang="id" data-theme="dark">
   <head>
+    <!-- Meta Dasar -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Muhammad Hashfi — Developer</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="theme-color" content="#0f0f0f" />
+
+    <!-- SEO Utama -->
+    <title>Muhammad Hashfi — Frontend Developer</title>
+    <meta
+      name="description"
+      content="Muhammad Hashfi adalah seorang Frontend Developer yang membangun web modern, cepat, dan elegan. Spesialisasi di Vue.js, React, dan UI/UX."
+    />
+    <meta
+      name="keywords"
+      content="Muhammad Hashfi, frontend developer, web developer, Vue.js, React, portfolio"
+    />
+    <meta name="author" content="Muhammad Hashfi" />
+    <link rel="canonical" href="https://muhammadhasfi.vercel.app/" />
+
+    <!-- Open Graph (WhatsApp, Facebook, LinkedIn preview) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Muhammad Hashfi — Frontend Developer" />
+    <meta
+      property="og:description"
+      content="Portfolio Muhammad Hashfi — membangun web modern yang cepat dan elegan."
+    />
+    <meta property="og:url" content="https://muhammadhasfi.vercel.app/" />
+    <meta
+      property="og:image"
+      content="https://muhammadhasfi.vercel.app/og-image.jpg"
+    />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content="Muhammad Hashfi" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Muhammad Hashfi — Frontend Developer" />
+    <meta
+      name="twitter:description"
+      content="Portfolio Muhammad Hashfi — web modern, cepat, dan elegan."
+    />
+    <meta
+      name="twitter:image"
+      content="https://muhammadhasfi.vercel.app/og-image.jpg"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- JSON-LD Schema (Google Knowledge Panel) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Muhammad Hashfi",
+        "jobTitle": "Frontend Developer",
+        "url": "https://muhammadhasfi.vercel.app/",
+        "sameAs": [
+          "https://github.com/muhammadhasfi",
+          "https://linkedin.com/in/muhammadhasfi"
+        ]
+      }
+    </script>
   </head>
   <body>
     <!-- NAV DESKTOP (pill) -->
@@ -175,26 +239,31 @@
           <!-- Card 1 -->
           <div class="project-card reveal">
             <div class="project-img">
-              <!-- GANTI: <img src="img/project1.jpg" alt="Project 1"> -->
+              <img src="image/quiz.png" alt="Project 1" />
               <div class="project-img-placeholder">
                 <span class="placeholder-icon">🖼</span>
-                <span>Ganti dengan gambar proyek</span>
+                <!-- <span>Ganti dengan gambar proyek</span> -->
               </div>
             </div>
             <div class="project-body">
               <div class="project-num">01</div>
-              <div class="project-title">Nama Proyek Satu</div>
+              <div class="project-title">Quiz App Vue</div>
               <div class="project-desc">
-                Deskripsi singkat tentang proyek ini. Apa yang dibuat, masalah
-                apa yang diselesaikan, dan hasil yang dicapai.
+                Aplikasi kuis interaktif menggunakan Vue.js dengan fitur
+                navigasi soal, perhitungan skor otomatis, dan antarmuka
+                responsif.
               </div>
               <div class="project-footer">
                 <div class="project-tech-tags">
-                  <span class="project-tag">Laravel</span>
-                  <span class="project-tag">MySQL</span>
                   <span class="project-tag">Vue.js</span>
                 </div>
-                <a href="#" class="project-link">Lihat →</a>
+                <a
+                  href="https://vue-quiz-iota.vercel.app/"
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Lihat →</a
+                >
               </div>
             </div>
           </div>
@@ -202,6 +271,7 @@
           <!-- Card 2 -->
           <div class="project-card reveal" style="transition-delay: 0.1s">
             <div class="project-img">
+              <img src="image/hr_app.png" alt="Project 2" />
               <div class="project-img-placeholder">
                 <span class="placeholder-icon">🖼</span>
                 <span>Ganti dengan gambar proyek</span>
@@ -209,14 +279,14 @@
             </div>
             <div class="project-body">
               <div class="project-num">02</div>
-              <div class="project-title">Nama Proyek Dua</div>
+              <div class="project-title">HRis</div>
               <div class="project-desc">
-                Deskripsi singkat tentang proyek ini. Apa yang dibuat, masalah
-                apa yang diselesaikan, dan hasil yang dicapai.
+                Aplikasi HR berbasis web untuk manajemen karyawan, absensi, dan
+                pengajuan cuti dengan sistem terstruktur.
               </div>
               <div class="project-footer">
                 <div class="project-tech-tags">
-                  <span class="project-tag">Node.js</span>
+                  <span class="project-tag">Laravel</span>
                   <span class="project-tag">PostgreSQL</span>
                   <span class="project-tag">REST API</span>
                 </div>
@@ -294,22 +364,14 @@
             Punya proyek menarik atau pertanyaan? Saya selalu terbuka untuk
             diskusi dan peluang baru.
           </p>
-          <a
-            href="/cdn-cgi/l/email-protection#e28a83918a848ba2878f838b8ecc818d8f"
-            class="contact-email"
-          >
-            ✉
-            <span
-              class="__cf_email__"
-              data-cfemail="5b333a28333d321b3e363a323775383436"
-              >[email&#160;protected]</span
-            >
+          <a href="mailto:muhammadhasfi@gmail.com" class="contact-email">
+            ✉ <span>muhammadhasfi@gmail.com</span>
           </a>
           <div class="contact-divider">atau temukan saya di</div>
           <div class="social-links" style="justify-content: center">
             <!-- Instagram -->
             <a
-              href="#"
+              href="https://www.instagram.com/has.dev/"
               class="social-link"
               title="Instagram"
               target="_blank"
@@ -323,7 +385,7 @@
             </a>
             <!-- Facebook -->
             <a
-              href="#"
+              href="https://www.facebook.com/muhammad.hasfi.35"
               class="social-link"
               title="Facebook"
               target="_blank"
@@ -337,7 +399,7 @@
             </a>
             <!-- GitHub -->
             <a
-              href="#"
+              href="https://github.com/muhasfi"
               class="social-link"
               title="GitHub"
               target="_blank"
@@ -351,7 +413,7 @@
             </a>
             <!-- LinkedIn -->
             <a
-              href="#"
+              href="www.linkedin.com/in/muhammad-hashfi-rafid-muttaqin"
               class="social-link"
               title="LinkedIn"
               target="_blank"
