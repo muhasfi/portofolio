@@ -109,19 +109,7 @@
         left: 0;
         right: 0;
         z-index: 100;
-        padding: 20px 0;
-        backdrop-filter: blur(16px) saturate(180%);
-        background: rgba(13, 13, 13, 0.7);
-        border-bottom: 1px solid transparent;
-        transition:
-          border-color var(--transition),
-          background var(--transition);
-      }
-      [data-theme="light"] nav {
-        background: rgba(247, 246, 242, 0.75);
-      }
-      nav.scrolled {
-        border-color: var(--line);
+        transition: all var(--transition);
       }
       .nav-inner {
         max-width: 1120px;
@@ -130,83 +118,224 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        height: 64px;
+      }
+      /* pill container */
+      .nav-pill {
+        position: absolute;
+        top: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 0;
+        background: rgba(20, 20, 20, 0.85);
+        border: 1px solid var(--line);
+        border-radius: 50px;
+        backdrop-filter: blur(20px) saturate(180%);
+        padding: 6px 6px 6px 20px;
+        transition: all var(--transition);
+        white-space: nowrap;
+      }
+      [data-theme="light"] .nav-pill {
+        background: rgba(255, 255, 255, 0.85);
+      }
+      nav.scrolled .nav-pill {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
       }
       .nav-logo {
         font-family: "Syne", sans-serif;
         font-weight: 800;
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: var(--heading);
         text-decoration: none;
         letter-spacing: -0.02em;
+        margin-right: 28px;
+        flex-shrink: 0;
       }
       .nav-logo span {
         color: var(--accent);
       }
       .nav-links {
         display: flex;
-        gap: 36px;
+        gap: 4px;
         list-style: none;
+        margin-right: 8px;
       }
       .nav-links a {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         font-weight: 500;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
+        letter-spacing: 0.03em;
         color: var(--muted);
         text-decoration: none;
         transition: color var(--transition);
-        position: relative;
-      }
-      .nav-links a::after {
-        content: "";
-        position: absolute;
-        bottom: -3px;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background: var(--accent);
-        transition: width var(--transition);
-      }
-      .nav-links a:hover {
-        color: var(--heading);
-      }
-      .nav-links a:hover::after {
-        width: 100%;
-      }
-      .nav-right {
-        display: flex;
-        gap: 12px;
-        align-items: center;
-      }
-      .theme-btn {
-        background: var(--bg3);
-        border: 1px solid var(--line);
+        padding: 6px 14px;
         border-radius: 50px;
-        padding: 7px 14px;
+        transition: all var(--transition);
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--heading);
+        background: var(--bg3);
+      }
+      .nav-links a.active {
+        color: var(--accent);
+      }
+
+      /* theme toggle inside pill */
+      .theme-btn {
+        background: var(--accent);
+        border: none;
+        border-radius: 50px;
+        padding: 8px 16px;
         cursor: pointer;
         display: flex;
         align-items: center;
         gap: 6px;
-        color: var(--body);
-        font-size: 0.8rem;
+        color: #111;
+        font-size: 0.78rem;
+        font-weight: 600;
         font-family: "DM Mono", monospace;
         transition: all var(--transition);
+        flex-shrink: 0;
       }
       .theme-btn:hover {
+        opacity: 0.85;
+        transform: scale(0.97);
+      }
+      .theme-icon {
+        font-size: 0.9rem;
+      }
+
+      /* hamburger — only on mobile */
+      .nav-mobile {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 12px 16px;
+        z-index: 101;
+      }
+      .nav-mobile-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(20, 20, 20, 0.9);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        backdrop-filter: blur(20px);
+        padding: 10px 10px 10px 18px;
+      }
+      [data-theme="light"] .nav-mobile-bar {
+        background: rgba(255, 255, 255, 0.9);
+      }
+      .nav-mobile-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 1rem;
+        color: var(--heading);
+        text-decoration: none;
+      }
+      .nav-mobile-logo span {
+        color: var(--accent);
+      }
+      .nav-mobile-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .theme-btn-sm {
+        background: var(--bg3);
+        border: 1px solid var(--line);
+        border-radius: 50px;
+        width: 36px;
+        height: 36px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--body);
+        font-size: 0.9rem;
+        transition: all var(--transition);
+      }
+      .theme-btn-sm:hover {
         border-color: var(--accent);
         color: var(--accent);
       }
-      .theme-icon {
-        font-size: 1rem;
-        transition: transform 0.4s;
-      }
       .menu-btn {
-        display: none;
-        background: none;
-        border: none;
+        background: var(--bg3);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        width: 36px;
+        height: 36px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: var(--heading);
-        font-size: 1.4rem;
+        font-size: 1.1rem;
+        transition: all var(--transition);
+      }
+      .menu-btn:hover {
+        border-color: var(--heading);
+      }
+      .menu-btn.open {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #111;
+      }
+
+      /* mobile drawer */
+      .nav-drawer {
+        display: none;
+        position: fixed;
+        top: 76px;
+        left: 16px;
+        right: 16px;
+        background: rgba(20, 20, 20, 0.97);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        backdrop-filter: blur(24px);
+        padding: 12px;
+        z-index: 100;
+        transform: translateY(-8px);
+        opacity: 0;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+      }
+      [data-theme="light"] .nav-drawer {
+        background: rgba(255, 255, 255, 0.97);
+      }
+      .nav-drawer.open {
+        display: block;
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+      .nav-drawer ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .nav-drawer ul a {
+        display: block;
+        padding: 12px 16px;
+        border-radius: 10px;
+        color: var(--body);
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: all var(--transition);
+      }
+      .nav-drawer ul a:hover,
+      .nav-drawer ul a.active {
+        background: var(--bg3);
+        color: var(--heading);
+      }
+      .nav-drawer ul a.active {
+        color: var(--accent);
       }
 
       /* ── HERO ─────────────────────────────────────────── */
@@ -724,7 +853,14 @@
 
       /* ── RESPONSIVE ───────────────────────────────────── */
 
-      /* Tablet landscape & below (≤1024px) */
+      /* Desktop: show pill nav, hide mobile nav */
+      .nav-mobile {
+        display: none;
+      }
+      .nav-drawer {
+        display: none;
+      }
+
       @media (max-width: 1024px) {
         .container {
           padding: 0 24px;
@@ -743,49 +879,36 @@
         }
       }
 
-      /* Tablet portrait & mobile (≤768px) */
+      /* ≤768px: switch to mobile nav */
       @media (max-width: 768px) {
-        /* Nav */
-        .nav-links {
+        /* Hide desktop pill, show mobile bar */
+        nav {
           display: none;
-          flex-direction: column;
-          gap: 24px;
         }
-        .nav-links.open {
-          display: flex;
-          position: fixed;
-          inset: 64px 0 0;
-          background: var(--bg);
-          padding: 40px 24px;
-          border-top: 1px solid var(--line);
-          z-index: 99;
-        }
-        .nav-links.open a {
-          font-size: 1.1rem;
-        }
-        .menu-btn {
-          display: flex;
+        .nav-mobile {
+          display: block;
         }
 
-        /* Hero */
+        /* hero push down for mobile bar */
         .hero {
-          padding: 100px 0 80px;
+          padding-top: 100px;
         }
+
+        /* hero CTA stack */
         .hero-sub {
           font-size: 0.95rem;
-          max-width: 100%;
         }
         .hero-ctas {
           flex-direction: column;
-          align-items: flex-start;
+          align-items: stretch;
         }
         .btn-primary,
         .btn-ghost {
-          width: 100%;
           justify-content: center;
+          text-align: center;
         }
 
-        /* About */
+        /* about */
         .about-grid {
           grid-template-columns: 1fr;
           gap: 40px;
@@ -794,7 +917,7 @@
           grid-template-columns: 1fr 1fr;
         }
 
-        /* Projects */
+        /* projects */
         .projects-grid {
           grid-template-columns: 1fr;
         }
@@ -804,34 +927,27 @@
           gap: 12px;
         }
 
-        /* Contact */
-        .contact-inner {
-          padding-top: 10px;
-        }
+        /* contact */
         .contact-email {
-          font-size: 0.9rem;
+          font-size: 0.88rem;
           word-break: break-all;
         }
 
-        /* Footer */
+        /* footer */
         .footer-inner {
           flex-direction: column;
           align-items: flex-start;
           gap: 16px;
         }
 
-        /* Sections */
         section {
           padding: 72px 0;
         }
       }
 
-      /* Mobile (≤480px) */
+      /* ≤480px */
       @media (max-width: 480px) {
         .container {
-          padding: 0 16px;
-        }
-        .nav-inner {
           padding: 0 16px;
         }
         .hero-inner {
@@ -841,61 +957,50 @@
           padding: 0 16px;
         }
 
-        /* Hero tighter */
         .hero {
-          padding: 88px 0 60px;
+          padding-top: 90px;
           min-height: 95vh;
         }
         .hero-tag {
-          font-size: 0.72rem;
-          padding: 5px 12px;
+          font-size: 0.7rem;
         }
 
-        /* About stats: stack to 2 cols, smaller text */
         .about-stats {
           grid-template-columns: 1fr 1fr;
         }
         .stat {
-          padding: 18px;
+          padding: 16px;
         }
         .stat-num {
           font-size: 1.8rem;
         }
 
-        /* Project card */
         .project-body {
-          padding: 18px;
+          padding: 16px;
         }
         .project-title {
           font-size: 1rem;
         }
 
-        /* Skill tags wrap nicely */
-        .skill-tags {
-          gap: 6px;
-        }
         .tag {
           font-size: 0.72rem;
-          padding: 5px 10px;
+          padding: 4px 10px;
         }
-
-        /* CTA buttons full width */
         .btn-primary,
         .btn-ghost {
-          padding: 13px 20px;
+          padding: 12px 20px;
           font-size: 0.85rem;
         }
 
-        /* Section spacing */
         section {
-          padding: 60px 0;
+          padding: 56px 0;
         }
         h2 {
           font-size: clamp(1.6rem, 6vw, 2.2rem);
         }
       }
 
-      /* Very small screens (≤360px) */
+      /* ≤360px */
       @media (max-width: 360px) {
         .about-stats {
           grid-template-columns: 1fr;
@@ -903,62 +1008,51 @@
         .stat-num {
           font-size: 1.6rem;
         }
-        .nav-logo {
-          font-size: 1rem;
-        }
-      }
-
-      /* ── CURSOR DOT ───────────────────────────────────── */
-      .cursor {
-        width: 10px;
-        height: 10px;
-        background: var(--accent);
-        border-radius: 50%;
-        position: fixed;
-        pointer-events: none;
-        z-index: 9998;
-        transform: translate(-50%, -50%);
-        transition:
-          width 0.2s,
-          height 0.2s,
-          background 0.2s;
-        mix-blend-mode: difference;
-      }
-      .cursor.hovered {
-        width: 36px;
-        height: 36px;
-        background: var(--accent);
-        opacity: 0.4;
-      }
-      @media (hover: none) {
-        .cursor {
-          display: none;
-        }
       }
     </style>
   </head>
   <body>
-    <!-- CURSOR -->
-    <div class="cursor" id="cursor"></div>
-
-    <!-- NAV -->
+    <!-- NAV DESKTOP (pill) -->
     <nav id="navbar">
       <div class="nav-inner">
-        <a href="#" class="nav-logo">MH<span>.</span></a>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="nav-right">
+        <div class="nav-pill">
+          <a href="#" class="nav-logo">MH<span>.</span></a>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
           <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
             <span class="theme-icon" id="themeIcon">☽</span>
             <span id="themeLabel">Dark</span>
           </button>
-          <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
         </div>
       </div>
     </nav>
+
+    <!-- NAV MOBILE -->
+    <div class="nav-mobile" id="navMobile">
+      <div class="nav-mobile-bar">
+        <a href="#" class="nav-mobile-logo">MH<span>.</span></a>
+        <div class="nav-mobile-right">
+          <button
+            class="theme-btn-sm"
+            id="themeBtnSm"
+            aria-label="Toggle theme"
+          >
+            <span id="themeIconSm">☽</span>
+          </button>
+          <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+        </div>
+      </div>
+    </div>
+    <div class="nav-drawer" id="navDrawer">
+      <ul>
+        <li><a href="#about" class="drawer-link">About</a></li>
+        <li><a href="#projects" class="drawer-link">Projects</a></li>
+        <li><a href="#contact" class="drawer-link">Contact</a></li>
+      </ul>
+    </div>
 
     <!-- HERO -->
     <section class="hero">
@@ -1342,48 +1436,79 @@
       // ── THEME TOGGLE ────────────────────────────────────
       const html = document.documentElement;
       const themeBtn = document.getElementById("themeBtn");
+      const themeBtnSm = document.getElementById("themeBtnSm");
       const themeIcon = document.getElementById("themeIcon");
+      const themeIconSm = document.getElementById("themeIconSm");
       const themeLabel = document.getElementById("themeLabel");
+
       const saved = localStorage.getItem("theme") || "dark";
       html.setAttribute("data-theme", saved);
       updateThemeUI(saved);
 
-      themeBtn.addEventListener("click", () => {
-        const current = html.getAttribute("data-theme");
-        const next = current === "dark" ? "light" : "dark";
-        html.setAttribute("data-theme", next);
-        localStorage.setItem("theme", next);
-        updateThemeUI(next);
-      });
-
-      function updateThemeUI(t) {
-        if (t === "dark") {
-          themeIcon.textContent = "☽";
-          themeLabel.textContent = "Dark";
-        } else {
-          themeIcon.textContent = "☀";
-          themeLabel.textContent = "Light";
-        }
+      function setTheme(t) {
+        html.setAttribute("data-theme", t);
+        localStorage.setItem("theme", t);
+        updateThemeUI(t);
       }
+      function updateThemeUI(t) {
+        const isDark = t === "dark";
+        if (themeIcon) themeIcon.textContent = isDark ? "☽" : "☀";
+        if (themeIconSm) themeIconSm.textContent = isDark ? "☽" : "☀";
+        if (themeLabel) themeLabel.textContent = isDark ? "Dark" : "Light";
+      }
+      themeBtn?.addEventListener("click", () =>
+        setTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark"),
+      );
+      themeBtnSm?.addEventListener("click", () =>
+        setTheme(html.getAttribute("data-theme") === "dark" ? "light" : "dark"),
+      );
 
       // ── NAVBAR SCROLL ───────────────────────────────────
       const navbar = document.getElementById("navbar");
       window.addEventListener("scroll", () => {
-        navbar.classList.toggle("scrolled", window.scrollY > 20);
+        navbar?.classList.toggle("scrolled", window.scrollY > 20);
       });
 
       // ── MOBILE MENU ─────────────────────────────────────
       const menuBtn = document.getElementById("menuBtn");
-      const navLinks = document.getElementById("navLinks");
-      menuBtn.addEventListener("click", () => {
-        navLinks.classList.toggle("open");
-        menuBtn.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
+      const navDrawer = document.getElementById("navDrawer");
+      let drawerOpen = false;
+
+      menuBtn?.addEventListener("click", () => {
+        drawerOpen = !drawerOpen;
+        if (drawerOpen) {
+          navDrawer.style.display = "block";
+          requestAnimationFrame(() => navDrawer.classList.add("open"));
+          menuBtn.textContent = "✕";
+          menuBtn.classList.add("open");
+        } else {
+          closeDrawer();
+        }
       });
-      navLinks.querySelectorAll("a").forEach((a) => {
-        a.addEventListener("click", () => {
-          navLinks.classList.remove("open");
-          menuBtn.textContent = "☰";
-        });
+
+      function closeDrawer() {
+        drawerOpen = false;
+        navDrawer.classList.remove("open");
+        menuBtn.textContent = "☰";
+        menuBtn.classList.remove("open");
+        setTimeout(() => {
+          if (!drawerOpen) navDrawer.style.display = "none";
+        }, 250);
+      }
+
+      document.querySelectorAll(".drawer-link").forEach((a) => {
+        a.addEventListener("click", closeDrawer);
+      });
+
+      // close on outside click
+      document.addEventListener("click", (e) => {
+        if (
+          drawerOpen &&
+          !navDrawer.contains(e.target) &&
+          !menuBtn.contains(e.target)
+        ) {
+          closeDrawer();
+        }
       });
 
       // ── SCROLL REVEAL ───────────────────────────────────
@@ -1397,39 +1522,9 @@
             }
           });
         },
-        { threshold: 0.12 },
+        { threshold: 0.1 },
       );
       reveals.forEach((el) => io.observe(el));
-
-      // ── CUSTOM CURSOR ───────────────────────────────────
-      const cursor = document.getElementById("cursor");
-      let mx = 0,
-        my = 0,
-        cx = 0,
-        cy = 0;
-      document.addEventListener("mousemove", (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-      });
-      const hoverables = document.querySelectorAll(
-        "a, button, .project-card, .tag, .social-link",
-      );
-      hoverables.forEach((el) => {
-        el.addEventListener("mouseenter", () =>
-          cursor.classList.add("hovered"),
-        );
-        el.addEventListener("mouseleave", () =>
-          cursor.classList.remove("hovered"),
-        );
-      });
-      function animateCursor() {
-        cx += (mx - cx) * 0.14;
-        cy += (my - cy) * 0.14;
-        cursor.style.left = cx + "px";
-        cursor.style.top = cy + "px";
-        requestAnimationFrame(animateCursor);
-      }
-      animateCursor();
 
       // ── ACTIVE NAV LINK ─────────────────────────────────
       const sections = document.querySelectorAll("section[id]");
@@ -1439,9 +1534,12 @@
         sections.forEach((s) => {
           if (window.scrollY >= s.offsetTop - 140) current = s.id;
         });
-        navAnchors.forEach((a) => {
-          a.style.color =
-            a.getAttribute("href") === "#" + current ? "var(--heading)" : "";
+        // desktop links
+        document.querySelectorAll(".nav-links a, .drawer-link").forEach((a) => {
+          a.classList.toggle(
+            "active",
+            a.getAttribute("href") === "#" + current,
+          );
         });
       });
     </script>
