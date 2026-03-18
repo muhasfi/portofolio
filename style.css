@@ -1030,3 +1030,61 @@ footer {
     transform: translate(0, 0);
   }
 }
+
+/* Load More */
+.load-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.load-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--body);
+  font-size: 0.875rem;
+  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.load-more-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #111;
+  transform: translateY(-2px);
+}
+
+.load-more-btn svg {
+  transition: transform var(--transition);
+}
+
+.load-more-btn:hover svg {
+  transform: translateY(3px);
+}
+
+/* Kartu tersembunyi */
+.project-card.hidden-card {
+  display: none;
+}
+
+/* Animasi saat muncul */
+.project-card.reveal-card {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

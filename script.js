@@ -219,3 +219,35 @@ window.addEventListener("scroll", () => {
     });
   });
 })();
+
+// Jalankan saat DOM siap
+document.addEventListener("DOMContentLoaded", function () {
+  const cards = document.querySelectorAll(".project-card");
+  const wrapper = document.getElementById("loadMoreWrapper");
+  const limit = 4;
+
+  // Sembunyikan kartu setelah index ke-3 (0-based)
+  cards.forEach((card, i) => {
+    if (i >= limit) {
+      card.classList.add("hidden-card");
+    }
+  });
+
+  // Jika total ≤ 4, sembunyikan tombol
+  if (cards.length <= limit) {
+    wrapper.style.display = "none";
+  }
+});
+
+function loadMoreProjects() {
+  const hiddenCards = document.querySelectorAll(".project-card.hidden-card");
+
+  hiddenCards.forEach((card, i) => {
+    card.classList.remove("hidden-card");
+    card.style.animationDelay = `${i * 0.1}s`;
+    card.classList.add("reveal-card");
+  });
+
+  // Sembunyikan tombol setelah semua tampil
+  document.getElementById("loadMoreWrapper").style.display = "none";
+}
