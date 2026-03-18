@@ -93,14 +93,34 @@ reveals.forEach((el) => io.observe(el));
 
 // ── ACTIVE NAV LINK ─────────────────────────────────
 const sections = document.querySelectorAll("section[id]");
-const navAnchors = document.querySelectorAll(".nav-links a");
-window.addEventListener("scroll", () => {
-  let current = "";
-  sections.forEach((s) => {
-    if (window.scrollY >= s.offsetTop - 140) current = s.id;
-  });
-  // desktop links
+
+function setActive(id) {
   document.querySelectorAll(".nav-links a, .drawer-link").forEach((a) => {
-    a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+    a.classList.toggle("active", a.getAttribute("href") === "#" + id);
   });
+}
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setActive(entry.target.id);
+      }
+    });
+  },
+  {
+    rootMargin: "-40% 0px -55% 0px",
+    threshold: 0,
+  },
+);
+
+sections.forEach((s) => observer.observe(s));
+
+// Fix section terakhir (#contact) yang terlalu pendek
+window.addEventListener("scroll", () => {
+  const scrolledToBottom =
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 10;
+  if (scrolledToBottom) {
+    setActive("contact");
+  }
 });
