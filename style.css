@@ -1005,3 +1005,28 @@ footer {
     font-size: 1.6rem;
   }
 }
+
+.stat {
+  position: relative;
+  overflow: hidden;
+}
+.stat.shaking {
+  animation: errShake 0.07s infinite;
+}
+@keyframes errShake {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2px, 1px);
+  }
+  50% {
+    transform: translate(2px, -1px);
+  }
+  75% {
+    transform: translate(-1px, 2px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}

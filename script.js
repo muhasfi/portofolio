@@ -124,3 +124,98 @@ window.addEventListener("scroll", () => {
     setActive("contact");
   }
 });
+
+(function () {
+  var errPool = [
+    "!",
+    "?",
+    "#",
+    "@",
+    "%",
+    "&",
+    "*",
+    "$",
+    "X",
+    "Ø",
+    "Σ",
+    "▓",
+    "░",
+    "▒",
+    "NaN",
+    "0xF",
+    "≠",
+  ];
+  var numPool = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+  var stats = [
+    { val: "1", sym: false, delay: 0 },
+    { val: "5", sym: false, delay: 200 },
+    { val: "5", sym: false, delay: 400 },
+    { val: "∞", sym: true, delay: 600 },
+  ];
+
+  function runScramble(i) {
+    var cfg = stats[i];
+    var el = document.getElementById("v" + i);
+    var stat = el.closest(".stat");
+    if (!el || !stat) return;
+
+    var duration = 1400;
+    var startTime = null,
+      lastFlip = 0,
+      speed = 60;
+
+    stat.classList.add("shaking");
+    el.style.color = "var(--accent)";
+
+    function tick(ts) {
+      if (!startTime) startTime = ts;
+      if (ts - startTime < duration) {
+        if (ts - lastFlip > speed) {
+          var pool = cfg.sym
+            ? errPool
+            : Math.random() < 0.45
+              ? errPool
+              : numPool;
+          el.textContent = pool[Math.floor(Math.random() * pool.length)];
+          speed = 35 + Math.random() * 80;
+          lastFlip = ts;
+        }
+        requestAnimationFrame(tick);
+      } else {
+        el.textContent = cfg.val;
+        el.style.color = "";
+        stat.classList.remove("shaking");
+      }
+    }
+
+    setTimeout(function () {
+      requestAnimationFrame(tick);
+    }, cfg.delay);
+  }
+
+  function runAll() {
+    for (var i = 0; i < 4; i++) runScramble(i);
+  }
+
+  // Jalankan saat pertama kali about masuk viewport
+  var aboutSection = document.querySelector("#about");
+  var hasRun = false;
+  var statObserver = new IntersectionObserver(
+    function (entries) {
+      if (entries[0].isIntersecting && !hasRun) {
+        hasRun = true;
+        runAll();
+      }
+    },
+    { threshold: 0.3 },
+  );
+  if (aboutSection) statObserver.observe(aboutSection);
+
+  // Jalankan setiap kali link About diklik (navbar desktop + mobile drawer)
+  document.querySelectorAll('a[href="#about"]').forEach(function (link) {
+    link.addEventListener("click", function () {
+      setTimeout(runAll, 400); // delay sedikit agar scroll selesai dulu
+    });
+  });
+})();
