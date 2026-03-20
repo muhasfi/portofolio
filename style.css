@@ -1040,6 +1040,129 @@ footer {
   }
 }
 
+/* ── GHOST CARD SILHOUETTES ───────────────────────── */
+.ghost-cards-preview {
+  position: relative;
+  display: none;
+  margin-top: 24px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.ghost-cards-preview.has-ghosts {
+  display: block;
+}
+
+/* Grid matches .projects-grid */
+.ghost-stack {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  /* Only show the top 25% of the cards */
+  max-height: 25vh;
+  overflow: hidden;
+}
+
+/* Ghost card = real card styling but dimmed */
+.ghost-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-br);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* minimum height so the image portion is visible */
+  min-height: 320px;
+}
+
+/* Dark overlay over each ghost card */
+.ghost-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: var(--radius);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* The image inside ghost card */
+.ghost-card-img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: var(--bg3);
+  flex-shrink: 0;
+}
+
+.ghost-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.5) saturate(0.6);
+}
+
+/* Fake body below the image — just coloured blocks */
+.ghost-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  background: var(--card-bg);
+}
+
+.ghost-block {
+  border-radius: 5px;
+  background: var(--bg3);
+  opacity: 0.45;
+}
+.ghost-block.num {
+  height: 9px;
+  width: 22%;
+}
+.ghost-block.title {
+  height: 14px;
+  width: 58%;
+  opacity: 0.55;
+}
+.ghost-block.line {
+  height: 9px;
+  width: 90%;
+}
+.ghost-block.line2 {
+  height: 9px;
+  width: 70%;
+}
+
+/* Each subsequent ghost is more faded */
+.ghost-card:nth-child(2) {
+  opacity: 0.6;
+}
+.ghost-card:nth-child(3) {
+  opacity: 0.3;
+}
+
+/* Gradient fade — bottom of the strip fades into bg */
+.ghost-cards-preview::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .ghost-stack {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Load More */
 .load-more-wrapper {
   display: flex;
