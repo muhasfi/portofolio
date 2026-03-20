@@ -251,3 +251,68 @@ function loadMoreProjects() {
   // Sembunyikan tombol setelah semua tampil
   document.getElementById("loadMoreWrapper").style.display = "none";
 }
+
+// ── LOAD MORE PROJECTS ─────────────────────────────
+(function () {
+  const LIMIT_DESKTOP = 6;
+  const LIMIT_MOBILE = 4;
+
+  const cards = Array.from(
+    document.querySelectorAll(".projects-grid .project-card"),
+  );
+  const wrapper = document.getElementById("loadMoreWrapper");
+  const btn = document.getElementById("loadMoreBtn");
+
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
+  function applyLimit() {
+    const limit = isMobile() ? LIMIT_MOBILE : LIMIT_DESKTOP;
+
+    cards.forEach((card, i) => {
+      if (i < limit) {
+        card.classList.remove("hidden-card");
+      } else {
+        card.classList.add("hidden-card");
+      }
+    });
+
+    const hasHidden = cards.some((c) => c.classList.contains("hidden-card"));
+    wrapper.style.display = hasHidden ? "flex" : "none";
+
+    btn.querySelector("span").textContent = "Tampilkan Lebih Banyak";
+    btn.querySelector("svg").style.transform = "";
+    btn.dataset.expanded = "false";
+  }
+
+  function loadMoreProjects() {
+    const isExpanded = btn.dataset.expanded === "true";
+
+    if (isExpanded) {
+      applyLimit();
+      window.scrollTo({
+        top: document.getElementById("projects").offsetTop - 80,
+        behavior: "smooth",
+      });
+    } else {
+      cards.forEach((card) => {
+        card.classList.remove("hidden-card");
+        card.classList.add("reveal-card");
+      });
+      btn.querySelector("span").textContent = "Tampilkan Lebih Sedikit";
+      btn.querySelector("svg").style.transform = "rotate(180deg)";
+      btn.dataset.expanded = "true";
+    }
+  }
+
+  window.loadMoreProjects = loadMoreProjects;
+
+  applyLimit();
+
+  let resizeTimer;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(applyLimit, 200);
+  });
+})();
