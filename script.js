@@ -336,9 +336,15 @@ window.addEventListener("scroll", () => {
 
   applyLimit();
 
+  // SESUDAH (fix)
   let resizeTimer;
   window.addEventListener("resize", function () {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(applyLimit, 200);
+    resizeTimer = setTimeout(function () {
+      // Jangan reset kalau sedang dalam state expanded
+      if (btn.dataset.expanded !== "true") {
+        applyLimit();
+      }
+    }, 200);
   });
 })();
