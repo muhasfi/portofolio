@@ -1248,7 +1248,7 @@ footer {
   color: var(--accent);
 }
 .glitch-text {
-  color: white;
+  color: var(--heading);
 }
 
 .glitch-text .accent {
