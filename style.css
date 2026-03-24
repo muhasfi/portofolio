@@ -395,15 +395,21 @@ h1 em {
   max-width: 480px;
   color: var(--body);
   line-height: 1.8;
+  animation: fadeUp 0.6s 0.3s ease both; /* delay diubah 0.2s → 0.3s */
+}
+.role-line {
+  opacity: 0;
   animation: fadeUp 0.6s 0.2s ease both;
 }
+
 .hero-ctas {
   display: flex;
   gap: 14px;
   margin-top: 44px;
   flex-wrap: wrap;
-  animation: fadeUp 0.6s 0.3s ease both;
+  animation: fadeUp 0.6s 0.4s ease both;
 }
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -909,6 +915,7 @@ footer {
   .hero-sub {
     font-size: 0.95rem;
   }
+
   .hero-ctas {
     flex-direction: column;
     align-items: stretch;
@@ -1233,4 +1240,221 @@ footer {
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #333;
+}
+
+.glitch-text {
+  position: relative;
+  display: inline-block;
+  color: var(--accent);
+}
+.glitch-text {
+  color: white;
+}
+
+.glitch-text .accent {
+  color: var(--accent);
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.glitch-text::before {
+  color: var(--accent);
+  text-shadow: -1px 0 var(--accent);
+}
+.glitch-text::after {
+  color: #00ffcc;
+  text-shadow: 1px 0 #00ffcc;
+}
+
+.glitch-text.is-glitching {
+  animation: glitch-main 0.25s steps(2) forwards;
+}
+.glitch-text.is-glitching::before {
+  animation: glitch-top 0.25s steps(2) forwards;
+}
+.glitch-text.is-glitching::after {
+  animation: glitch-bot 0.25s steps(2) forwards;
+}
+
+@keyframes glitch-main {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 1px);
+  }
+  40% {
+    transform: translate(2px, -1px);
+  }
+  60% {
+    transform: translate(-1px, 2px);
+  }
+  80% {
+    transform: translate(1px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes glitch-top {
+  0% {
+    opacity: 0.8;
+    clip-path: inset(0 0 60% 0);
+    transform: translate(-3px, -1px);
+  }
+  25% {
+    clip-path: inset(20% 0 40% 0);
+    transform: translate(3px, 0);
+  }
+  50% {
+    clip-path: inset(40% 0 20% 0);
+    transform: translate(-2px, 1px);
+  }
+  75% {
+    clip-path: inset(60% 0 0% 0);
+    transform: translate(2px, -1px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0);
+  }
+}
+
+@keyframes glitch-bot {
+  0% {
+    opacity: 0.7;
+    clip-path: inset(60% 0 0 0);
+    transform: translate(3px, 1px);
+  }
+  25% {
+    clip-path: inset(40% 0 20% 0);
+    transform: translate(-3px, 0);
+  }
+  50% {
+    clip-path: inset(20% 0 40% 0);
+    transform: translate(2px, -1px);
+  }
+  75% {
+    clip-path: inset(0% 0 60% 0);
+    transform: translate(-2px, 1px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0);
+  }
+}
+
+.tech-marquee-section {
+  margin-top: 4rem;
+  position: relative;
+  padding: 20px 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* jarak antar dua baris */
+}
+
+.marquee-reverse {
+  animation: scroll-reverse 35s linear infinite;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+
+@keyframes scroll-reverse {
+  from {
+    transform: translateX(-33.333%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* fade edges */
+.tech-marquee-section::before,
+.tech-marquee-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 140px;
+  z-index: 2;
+  pointer-events: none;
+}
+.tech-marquee-section::before {
+  left: 0;
+  background: linear-gradient(to right, #0a0a0f 20%, transparent);
+}
+.tech-marquee-section::after {
+  right: 0;
+  background: linear-gradient(to left, #0a0a0f 20%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+}
+.marquee-track {
+  animation: scroll 35s linear infinite;
+}
+
+/* arah kebalik */
+.marquee-reverse {
+  animation: scroll-reverse 35s linear infinite;
+}
+/* 
+.marquee-track:hover {
+  animation-play-state: paused;
+} */
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+
+.tech-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+  /* grey + very faint */
+  filter: grayscale(1) brightness(1.6);
+  opacity: 0.2;
+  transition:
+    opacity 0.35s,
+    filter 0.35s;
+  cursor: default;
+}
+
+.tech-item:hover {
+  opacity: 0.5;
+  filter: grayscale(0.5) brightness(1.3);
+}
+
+.tech-item svg {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: block;
 }
