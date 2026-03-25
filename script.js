@@ -96,6 +96,17 @@ menuBtn?.addEventListener("click", () => {
 
   setTimeout(glitchLoop);
 })();
+
+function openRandomMeja(event) {
+  event.preventDefault(); // supaya tidak langsung buka link
+
+  // random angka 1–15
+  const meja = Math.floor(Math.random() * 15) + 1;
+
+  // buka link dengan meja random
+  const url = `https://restoran-git-main-muhasfis-projects.vercel.app/menu?meja=${meja}`;
+  window.open(url, "_blank");
+}
 function closeDrawer() {
   drawerOpen = false;
   navDrawer.classList.remove("open");
