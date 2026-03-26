@@ -1399,11 +1399,11 @@ footer {
 }
 .tech-marquee-section::before {
   left: 0;
-  background: linear-gradient(to right, #0a0a0f 20%, transparent);
+  background: linear-gradient(to right, var(--bg) 20%, transparent);
 }
 .tech-marquee-section::after {
   right: 0;
-  background: linear-gradient(to left, #0a0a0f 20%, transparent);
+  background: linear-gradient(to left, var(--bg) 20%, transparent);
 }
 
 .marquee-track {
@@ -1445,6 +1445,16 @@ footer {
     opacity 0.35s,
     filter 0.35s;
   cursor: default;
+}
+
+[data-theme="light"] .tech-item {
+  filter: grayscale(1) brightness(0.4);
+  opacity: 0.25;
+}
+
+[data-theme="light"] .tech-item:hover {
+  filter: grayscale(0.3) brightness(0.7);
+  opacity: 0.6;
 }
 
 .tech-item:hover {
