@@ -104,7 +104,7 @@ function openRandomMeja(event) {
   const meja = Math.floor(Math.random() * 15) + 1;
 
   // buka link dengan meja random
-  const url = `restoran-taupe.vercel.app/menu?meja=${meja}`;
+  const url = `https://restoran-taupe.vercel.app/menu?meja=${meja}`;
   window.open(url, "_blank");
 }
 function closeDrawer() {
