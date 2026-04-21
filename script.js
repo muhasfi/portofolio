@@ -817,3 +817,115 @@ window.addEventListener("scroll", () => {
     });
   });
 })();
+// ── HERO CODE RAIN ───────────────────────────────────
+window.addEventListener('load', function () {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+
+  const tokens = [
+    // Laravel / PHP
+    { text: 'Route::get()',         color: '#f05340' },
+    { text: '$request->input()',    color: '#f05340' },
+    { text: 'Auth::user()',         color: '#f05340' },
+    { text: 'DB::table()',          color: '#f05340' },
+    { text: '->where()->first()',   color: '#f05340' },
+    { text: 'Artisan::call()',      color: '#f05340' },
+    { text: '@foreach($data)',      color: '#f05340' },
+    { text: "middleware('auth')",   color: '#f05340' },
+    { text: 'HasMany::class',       color: '#f05340' },
+    { text: "->with('user')",       color: '#f05340' },
+    // Node.js / Express
+    { text: 'app.use(express())',   color: '#68a063' },
+    { text: 'req.body',             color: '#68a063' },
+    { text: 'res.json({})',         color: '#68a063' },
+    { text: 'app.listen(3000)',     color: '#68a063' },
+    { text: "router.get('/')",      color: '#68a063' },
+    { text: 'process.env.PORT',     color: '#68a063' },
+    { text: 'next(err)',            color: '#68a063' },
+    { text: 'module.exports',       color: '#68a063' },
+    // Vue.js
+    { text: 'v-for="item in list"', color: '#42b883' },
+    { text: 'v-model="form.name"',  color: '#42b883' },
+    { text: 'ref(false)',           color: '#42b883' },
+    { text: 'computed(() =>',       color: '#42b883' },
+    { text: "emit('update')",       color: '#42b883' },
+    { text: 'defineProps({})',      color: '#42b883' },
+    { text: 'watch(state, fn)',     color: '#42b883' },
+    { text: '<template>',           color: '#42b883' },
+    // Flutter / Dart
+    { text: 'Widget build(ctx)',    color: '#54c5f8' },
+    { text: 'setState(() {})',      color: '#54c5f8' },
+    { text: 'Future<void>',         color: '#54c5f8' },
+    { text: 'Navigator.push()',     color: '#54c5f8' },
+    { text: 'Scaffold(',            color: '#54c5f8' },
+    { text: 'StreamBuilder<>',      color: '#54c5f8' },
+    { text: 'Provider.of<T>(ctx)',  color: '#54c5f8' },
+    // SQL
+    { text: 'SELECT * FROM',        color: '#e8c46a' },
+    { text: 'JOIN users ON id',     color: '#e8c46a' },
+    { text: 'WHERE deleted_at',     color: '#e8c46a' },
+    { text: 'GROUP BY user_id',     color: '#e8c46a' },
+    { text: 'INDEX ON (email)',      color: '#e8c46a' },
+    { text: 'TRANSACTION BEGIN',    color: '#e8c46a' },
+    { text: 'INSERT INTO logs',     color: '#e8c46a' },
+    { text: 'HAVING COUNT(*) > 1',  color: '#e8c46a' },
+  ];
+
+  let cols = [];
+
+  function buildCols() {
+    cols = [];
+    const W = canvas.width;
+    const H = canvas.height;
+    const COL_W = 48;
+    const startX = 0;
+    for (let x = startX; x < W + 20; x += COL_W) {
+      const tk = tokens[Math.floor(Math.random() * tokens.length)];
+      cols.push({
+        x,
+        y: Math.random() * H,
+        speed:   0.10 + Math.random() * 0.18,
+        token:   tk,
+        opacity: 0.06 + Math.random() * 0.17,
+        size:    9 + Math.floor(Math.random() * 3),
+      });
+    }
+  }
+
+  function resize() {
+    // Gunakan parentElement sebagai referensi ukuran
+    const parent = canvas.parentElement;
+    const W = parent ? parent.offsetWidth  : window.innerWidth;
+    const H = parent ? parent.offsetHeight : window.innerHeight;
+    canvas.width  = W || window.innerWidth;
+    canvas.height = H || window.innerHeight;
+    buildCols();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    cols.forEach(function (col) {
+      var hex = col.token.color;
+      var r = parseInt(hex.slice(1, 3), 16);
+      var g = parseInt(hex.slice(3, 5), 16);
+      var b = parseInt(hex.slice(5, 7), 16);
+      ctx.font      = col.size + 'px "DM Mono", monospace';
+      ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + col.opacity + ')';
+      ctx.fillText(col.token.text, col.x, col.y);
+      col.y += col.speed;
+      if (col.y > canvas.height + 20) {
+        col.y       = -16;
+        col.token   = tokens[Math.floor(Math.random() * tokens.length)];
+        col.opacity = 0.06 + Math.random() * 0.17;
+        col.speed   = 0.10 + Math.random() * 0.18;
+      }
+    });
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  draw();
+  window.addEventListener('resize', resize);
+});

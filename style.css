@@ -332,19 +332,43 @@ nav.scrolled .nav-pill {
   position: relative;
   overflow: hidden;
 }
-.hero-grid-bg {
+.hero-code-bg {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(
-    ellipse 80% 80% at 50% 50%,
-    black 20%,
+  overflow: hidden;
+  z-index: 0;
+}
+.hero-code-bg canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.hero-code-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(13,13,13,0.92) 0%,
+    rgba(13,13,13,0.75) 20%,
+    rgba(13,13,13,0.35) 42%,
+    rgba(13,13,13,0.1) 60%,
     transparent 100%
   );
-  opacity: 0.35;
+  pointer-events: none;
+  z-index: 1;
+}
+[data-theme="light"] .hero-code-fade {
+  background: linear-gradient(
+    to right,
+    rgba(247,246,242,0.92) 0%,
+    rgba(247,246,242,0.75) 20%,
+    rgba(247,246,242,0.35) 42%,
+    rgba(247,246,242,0.1) 60%,
+    transparent 100%
+  );
 }
 .hero-inner {
   position: relative;
